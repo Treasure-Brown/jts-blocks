@@ -1,6 +1,10 @@
 # JT's Blocks
 
-A local recreation of the Yahoo! Games puzzle **JT's Blocks**. Open `index.html` in a browser — no install, no build.
+A local recreation of the Yahoo! Games puzzle **JT's Blocks**.
+
+**Play:** https://treasure-brown.github.io/jts-blocks/
+
+Or open `index.html` in a browser — no install, no build.
 
 ## How to play
 
