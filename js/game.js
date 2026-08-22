@@ -79,13 +79,24 @@
     return n < 2 ? 0 : 5 * n * n;
   }
 
+  function isPhoneBoard() {
+    const shortSide = Math.min(screen.width, screen.height);
+    const ua = navigator.userAgent || "";
+    return (
+      /iPhone|iPod|Android.+Mobile|Mobile.+Android/i.test(ua) ||
+      shortSide <= 520 ||
+      window.innerWidth <= 760
+    );
+  }
+
   function applyLayout() {
-    const mobile = window.matchMedia("(max-width: 760px)").matches;
+    const mobile = isPhoneBoard();
     ROWS = mobile ? 10 : 9;
     COLS = mobile ? 8 : 14;
     NUM_MIXERS = mobile ? 3 : 5;
     boardEl.style.setProperty("--cols", String(COLS));
     boardEl.style.setProperty("--rows", String(ROWS));
+    document.body.classList.toggle("is-phone", mobile);
   }
 
   function totalBlocks() {
