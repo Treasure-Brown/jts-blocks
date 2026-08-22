@@ -1,8 +1,8 @@
 (() => {
-  const ROWS = 9;
-  const COLS = 14;
+  let ROWS = 9;
+  let COLS = 14;
   const NUM_COLORS = 5;
-  const NUM_MIXERS = 5;
+  let NUM_MIXERS = 5;
   const MIXER = 6;
   const MAX_CHARGES = 3;
   const UNDOS_PER_BOARD = 1;
@@ -79,8 +79,21 @@
     return n < 2 ? 0 : 5 * n * n;
   }
 
+  function applyLayout() {
+    const mobile = window.matchMedia("(max-width: 760px)").matches;
+    ROWS = mobile ? 10 : 9;
+    COLS = mobile ? 8 : 14;
+    NUM_MIXERS = mobile ? 3 : 5;
+    boardEl.style.setProperty("--cols", String(COLS));
+    boardEl.style.setProperty("--rows", String(ROWS));
+  }
+
+  function totalBlocks() {
+    return ROWS * COLS;
+  }
+
   function quotaFor(lvl) {
-    return 1800 + 280 * (lvl - 1);
+    return Math.round((1800 + 280 * (lvl - 1)) * (totalBlocks() / 126));
   }
 
   function clearBonus(percent) {
@@ -564,16 +577,18 @@
 
   function starCount(quota, remaining) {
     if (roundScore < quota) return 0;
+    const tidy = Math.max(8, Math.round(18 * totalBlocks() / 126));
+    const wipe = Math.max(3, Math.round(6 * totalBlocks() / 126));
     let stars = 1;
-    if (remaining <= 18) stars = 2;
-    if (remaining <= 6 || biggestGroup >= 12) stars = 3;
+    if (remaining <= tidy) stars = 2;
+    if (remaining <= wipe || biggestGroup >= 10) stars = 3;
     return stars;
   }
 
   function finishBoard() {
     ended = true;
     const remaining = remainingCount();
-    const percent = Math.floor(((ROWS * COLS - remaining) / (ROWS * COLS)) * 100);
+      const percent = Math.floor(((totalBlocks() - remaining) / totalBlocks()) * 100);
     const bonus = clearBonus(percent);
     roundScore += bonus;
     career += bonus;
@@ -630,6 +645,7 @@
       rng = Math.random;
     }
 
+    applyLayout();
     roundScore = 0;
     undos = UNDOS_PER_BOARD;
     fillBoard();

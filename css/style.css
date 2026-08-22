@@ -343,8 +343,8 @@ button {
   --cols: 14;
   --rows: 9;
   position: relative;
-  width: min(100%, calc(100cqh * 14 / 9));
-  aspect-ratio: 14 / 9;
+  width: min(100%, calc(100cqh * var(--cols) / var(--rows)));
+  aspect-ratio: var(--cols) / var(--rows);
   max-height: 100%;
   background: rgba(17, 17, 17, 0.16);
   overflow: hidden;
@@ -659,6 +659,10 @@ button {
   .move-chip {
     font-size: 0.72rem;
     padding: 3px 6px;
+  }
+
+  .block .face {
+    inset: 2px;
   }
 }
 
