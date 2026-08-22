@@ -10,7 +10,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="apple-mobile-web-app-title" content="TB Flood" />
     <meta name="mobile-web-app-capable" content="yes" />
-    <link rel="stylesheet" href="css/style.css?v=5" />
+    <link rel="stylesheet" href="css/style.css?v=6" />
     <link rel="icon" href="favicon.svg" type="image/svg+xml" />
     <link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32" />
     <link rel="apple-touch-icon" href="apple-touch-icon.png" />
@@ -46,12 +46,20 @@
       </section>
 
       <div class="chips">
-        <div class="chip">
-          <span class="label">Left</span>
-          <strong id="left">16</strong>
+        <div class="chip" title="Charges">
+          <span class="label">Charges</span>
+          <div class="pips" id="charges" aria-label="3 charges"></div>
         </div>
         <div class="chip">
-          <span class="label">Best leftover</span>
+          <span class="label">Level</span>
+          <strong id="level">1</strong>
+        </div>
+        <div class="chip">
+          <span class="label">Career</span>
+          <strong id="career">0</strong>
+        </div>
+        <div class="chip">
+          <span class="label">Best</span>
           <strong id="best">—</strong>
         </div>
       </div>
@@ -71,7 +79,7 @@
       <div class="sheet">
         <p class="kicker">How</p>
         <h2>Paint from the corner</h2>
-        <p>The top-left patch is yours. Tap a color to change it — it swallows every touching tile of that color. Fill the whole board before you run out of moves.</p>
+        <p>The top-left patch is yours. Tap a color to change it — it swallows every touching tile of that color. Fill the board before you run out of moves. Win and the next level gets bigger, noisier, and stingier with moves. Miss the cap and you lose a charge.</p>
         <div class="modal-actions">
           <button type="button" class="primary" id="how-next">Play</button>
         </div>
@@ -84,16 +92,19 @@
         <h2 id="end-title">Nice.</h2>
         <div class="stars" id="end-stars" aria-label="stars"></div>
         <dl class="results">
+          <div><dt>Level</dt><dd id="end-level">1</dd></div>
           <div><dt>Moves</dt><dd id="end-moves">0</dd></div>
           <div><dt>Leftover</dt><dd id="end-left">0</dd></div>
+          <div><dt>Career</dt><dd id="end-total">0</dd></div>
         </dl>
         <div class="modal-actions">
+          <button type="button" class="primary" id="continue-btn">Next board</button>
           <button type="button" class="primary" id="again-btn">Play again</button>
         </div>
       </div>
     </div>
 
-    <script src="js/common.js?v=5"></script>
-    <script src="js/flood.js?v=5"></script>
+    <script src="js/common.js?v=6"></script>
+    <script src="js/flood.js?v=6"></script>
   </body>
 </html>

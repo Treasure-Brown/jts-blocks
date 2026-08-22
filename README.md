@@ -9,7 +9,7 @@ Or open `index.html` in a browser — no install, no build.
 ## Games
 
 - **[Blocks](blocks.html)** — Clear groups of two or more. Beat the quota. Mixers scramble a 5×5. Recreates the Yahoo! Games puzzle JT's Blocks.
-- **[Flood](flood.html)** — Paint from the top-left until the board is one color.
+- **[Flood](flood.html)** — Paint from the top-left until the board is one color. Each win grows the board, adds colors, and tightens the move cap.
 - **[Lights](lights.html)** — Tap a tile to flip it and its neighbors. Lights out wins.
 - **[Pairs](pairs.html)** — Flip two tiles. Match the marks.
 
