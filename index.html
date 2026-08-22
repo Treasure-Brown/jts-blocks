@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>JT's Blocks</title>
+    <meta name="description" content="A local recreation of the Yahoo! Games puzzle JT's Blocks." />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="JT's Blocks" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23f3eee6'/%3E%3Crect x='4' y='4' width='26' height='26' fill='%23c8f04a'/%3E%3Crect x='34' y='4' width='26' height='26' fill='%23ff4d2e'/%3E%3Crect x='4' y='34' width='26' height='26' fill='%23f3b6c5'/%3E%3Crect x='34' y='34' width='26' height='26' fill='%233ed4c8'/%3E%3C/svg%3E" />
+  </head>
+  <body>
+    <div class="sparkle sparkle-a" aria-hidden="true"></div>
+    <div class="sparkle sparkle-b" aria-hidden="true"></div>
+    <div class="sparkle sparkle-c" aria-hidden="true"></div>
+
+    <div class="app">
+      <header class="top">
+        <h1 class="logo">
+          <span class="logo-strong">JT'S</span>
+          <span class="logo-script">Blocks</span>
+        </h1>
+        <nav class="actions">
+          <button type="button" class="ghost" id="daily-btn">Daily</button>
+          <button type="button" class="ghost" id="how-btn">How</button>
+          <button type="button" class="ghost" id="new-btn">New</button>
+        </nav>
+      </header>
+
+      <section class="meter" aria-live="polite">
+        <div class="meter-top">
+          <span class="label">This board</span>
+          <strong><span id="round-score">0</span> / <span id="quota">1800</span></strong>
+        </div>
+        <div class="meter-bar" aria-hidden="true">
+          <div class="meter-fill" id="meter-fill"></div>
+        </div>
+        <p class="meter-note" id="meter-note">Hit the quota. Leftovers decide your stars.</p>
+      </section>
+
+      <div class="chips">
+        <div class="chip" title="Charges">
+          <span class="label">Charges</span>
+          <div class="pips" id="charges" aria-label="3 charges"></div>
+        </div>
+        <div class="chip">
+          <span class="label">Mixers</span>
+          <strong id="mixer-count">5</strong>
+        </div>
+        <div class="chip">
+          <span class="label">Board</span>
+          <strong id="level">1</strong>
+        </div>
+        <div class="chip">
+          <span class="label">Career</span>
+          <strong id="career">0</strong>
+        </div>
+        <button type="button" class="chip chip-btn" id="undo-btn">Undo · 1</button>
+      </div>
+
+      <div class="stage">
+        <div id="board" class="board" role="grid" aria-label="JT's Blocks board">
+          <div id="move-chip" class="move-chip" hidden></div>
+        </div>
+        <p class="hint" id="hint">Tap a group, tap again to clear.</p>
+      </div>
+    </div>
+
+    <div class="toast" id="toast" hidden></div>
+
+    <div class="modal" id="how-modal" hidden>
+      <div class="sheet">
+        <p class="kicker" id="how-kicker">1 / 3</p>
+        <div id="how-step"></div>
+        <div class="modal-actions">
+          <button type="button" class="ghost" id="how-back" hidden>Back</button>
+          <button type="button" class="primary" id="how-next">Next</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal" id="end-modal" hidden>
+      <div class="sheet">
+        <p class="kicker" id="end-kicker">Board complete</p>
+        <h2 id="end-title">Nice.</h2>
+        <div class="stars" id="end-stars" aria-label="stars"></div>
+        <dl class="results">
+          <div><dt>Quota</dt><dd id="end-quota">0</dd></div>
+          <div><dt>This board</dt><dd id="end-round">0</dd></div>
+          <div><dt>Left on the board</dt><dd id="end-remaining">0</dd></div>
+          <div><dt>Career</dt><dd id="end-total">0</dd></div>
+        </dl>
+        <div class="modal-actions">
+          <button type="button" class="primary" id="continue-btn">Next board</button>
+          <button type="button" class="primary" id="again-btn">Play again</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="js/game.js"></script>
+  </body>
+</html>
