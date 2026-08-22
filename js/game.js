@@ -6,8 +6,10 @@
   const MIXER = 6;
   const MAX_CHARGES = 3;
   const UNDOS_PER_BOARD = 1;
-  const BEST_KEY = "jts-blocks-best";
-  const HELP_KEY = "jts-blocks-seen-help-v2";
+  const BEST_KEY = "tb-blocks-best";
+  const HELP_KEY = "tb-blocks-seen-help";
+  TB.migrateKey(BEST_KEY, "jts-blocks-best");
+  TB.migrateKey(HELP_KEY, "jts-blocks-seen-help-v2");
 
   const HOW_STEPS = [
     {
@@ -79,18 +81,8 @@
     return n < 2 ? 0 : 5 * n * n;
   }
 
-  function isPhoneBoard() {
-    const shortSide = Math.min(screen.width, screen.height);
-    const ua = navigator.userAgent || "";
-    return (
-      /iPhone|iPod|Android.+Mobile|Mobile.+Android/i.test(ua) ||
-      shortSide <= 520 ||
-      window.innerWidth <= 760
-    );
-  }
-
   function applyLayout() {
-    const mobile = isPhoneBoard();
+    const mobile = TB.isPhone();
     ROWS = mobile ? 10 : 9;
     COLS = mobile ? 8 : 14;
     NUM_MIXERS = mobile ? 3 : 5;
@@ -111,20 +103,6 @@
     if (percent <= 85) return 0;
     const leftover = 100 - percent;
     return 25 * (15 - leftover) ** 2;
-  }
-
-  function mulberry32(seed) {
-    return function () {
-      let t = (seed += 0x6d2b79f5);
-      t = Math.imul(t ^ (t >>> 15), t | 1);
-      t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
-      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
-    };
-  }
-
-  function dailySeed() {
-    const d = new Date();
-    return d.getFullYear() * 10000 + (d.getMonth() + 1) * 100 + d.getDate();
   }
 
   function cell(r, c) {
@@ -649,9 +627,9 @@
       career = 0;
       level = 1;
       charges = MAX_CHARGES;
-      rng = seeded ? mulberry32(dailySeed()) : Math.random;
+      rng = seeded ? TB.mulberry32(TB.dailySeed()) : Math.random;
     } else if (seeded) {
-      rng = mulberry32(dailySeed() + level * 9973);
+      rng = TB.mulberry32(TB.dailySeed() + level * 9973);
     } else if (rng === Math.random) {
       rng = Math.random;
     }

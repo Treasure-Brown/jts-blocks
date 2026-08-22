@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
+    <title>TB Flood</title>
+    <meta name="description" content="Flood the board with one color before you run out of moves." />
+    <meta name="theme-color" content="#f3eee6" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="TB Flood" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <link rel="stylesheet" href="css/style.css?v=5" />
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32" />
+    <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+  </head>
+  <body>
+    <div class="sparkle sparkle-a" aria-hidden="true"></div>
+    <div class="sparkle sparkle-b" aria-hidden="true"></div>
+    <div class="sparkle sparkle-c" aria-hidden="true"></div>
+
+    <div class="app">
+      <header class="top">
+        <a class="logo" href="index.html" title="Arcade">
+          <span class="logo-strong">TB</span>
+          <span class="logo-script">Flood</span>
+        </a>
+        <nav class="actions">
+          <a class="ghost arcade-link" href="index.html">Arcade</a>
+          <button type="button" class="ghost" id="daily-btn">Daily</button>
+          <button type="button" class="ghost" id="how-btn">How</button>
+          <button type="button" class="ghost" id="new-btn">New</button>
+        </nav>
+      </header>
+
+      <section class="meter" aria-live="polite">
+        <div class="meter-top">
+          <span class="label">Moves</span>
+          <strong><span id="moves">0</span> / <span id="max-moves">16</span></strong>
+        </div>
+        <div class="meter-bar" aria-hidden="true">
+          <div class="meter-fill" id="meter-fill"></div>
+        </div>
+        <p class="meter-note" id="meter-note">Tap a color. The top-left region spreads.</p>
+      </section>
+
+      <div class="chips">
+        <div class="chip">
+          <span class="label">Left</span>
+          <strong id="left">16</strong>
+        </div>
+        <div class="chip">
+          <span class="label">Best leftover</span>
+          <strong id="best">—</strong>
+        </div>
+      </div>
+
+      <div class="stage">
+        <div class="board-frame">
+          <div id="board" class="board" role="grid" aria-label="Flood board"></div>
+        </div>
+        <div class="palette" id="palette" aria-label="Colors"></div>
+        <p class="hint" id="hint">Tap a color to flood from the top-left.</p>
+      </div>
+    </div>
+
+    <div class="toast" id="toast" hidden></div>
+
+    <div class="modal" id="how-modal" hidden>
+      <div class="sheet">
+        <p class="kicker">How</p>
+        <h2>Paint from the corner</h2>
+        <p>The top-left patch is yours. Tap a color to change it — it swallows every touching tile of that color. Fill the whole board before you run out of moves.</p>
+        <div class="modal-actions">
+          <button type="button" class="primary" id="how-next">Play</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal" id="end-modal" hidden>
+      <div class="sheet">
+        <p class="kicker" id="end-kicker">Board complete</p>
+        <h2 id="end-title">Nice.</h2>
+        <div class="stars" id="end-stars" aria-label="stars"></div>
+        <dl class="results">
+          <div><dt>Moves</dt><dd id="end-moves">0</dd></div>
+          <div><dt>Leftover</dt><dd id="end-left">0</dd></div>
+        </dl>
+        <div class="modal-actions">
+          <button type="button" class="primary" id="again-btn">Play again</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="js/common.js?v=5"></script>
+    <script src="js/flood.js?v=5"></script>
+  </body>
+</html>

@@ -3,19 +3,19 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
-    <title>JT's Blocks</title>
-    <meta name="description" content="A local recreation of the Yahoo! Games puzzle JT's Blocks." />
+    <title>TB Arcade</title>
+    <meta name="description" content="Short color-tile games: Blocks, Flood, Lights, and Pairs." />
     <meta name="theme-color" content="#f3eee6" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-    <meta name="apple-mobile-web-app-title" content="JT's Blocks" />
+    <meta name="apple-mobile-web-app-title" content="TB Arcade" />
     <meta name="mobile-web-app-capable" content="yes" />
-    <link rel="stylesheet" href="css/style.css?v=4" />
+    <link rel="stylesheet" href="css/style.css?v=5" />
     <link rel="icon" href="favicon.svg" type="image/svg+xml" />
     <link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32" />
     <link rel="apple-touch-icon" href="apple-touch-icon.png" />
   </head>
-  <body>
+  <body class="lobby">
     <div class="sparkle sparkle-a" aria-hidden="true"></div>
     <div class="sparkle sparkle-b" aria-hidden="true"></div>
     <div class="sparkle sparkle-c" aria-hidden="true"></div>
@@ -23,88 +23,74 @@
     <div class="app">
       <header class="top">
         <h1 class="logo">
-          <span class="logo-strong">JT'S</span>
-          <span class="logo-script">Blocks</span>
+          <span class="logo-strong">TB</span>
+          <span class="logo-script">Arcade</span>
         </h1>
-        <nav class="actions">
-          <button type="button" class="ghost" id="daily-btn">Daily</button>
-          <button type="button" class="ghost" id="how-btn">How</button>
-          <button type="button" class="ghost" id="new-btn">New</button>
-        </nav>
       </header>
 
-      <section class="meter" aria-live="polite">
-        <div class="meter-top">
-          <span class="label">This board</span>
-          <strong><span id="round-score">0</span> / <span id="quota">1800</span></strong>
-        </div>
-        <div class="meter-bar" aria-hidden="true">
-          <div class="meter-fill" id="meter-fill"></div>
-        </div>
-        <p class="meter-note" id="meter-note">Hit the quota. Leftovers decide your stars.</p>
-      </section>
+      <p class="lobby-copy">Same tiles. Short games. Built for a phone in one sitting.</p>
 
-      <div class="chips">
-        <div class="chip" title="Charges">
-          <span class="label">Charges</span>
-          <div class="pips" id="charges" aria-label="3 charges"></div>
-        </div>
-        <div class="chip">
-          <span class="label">Mixers</span>
-          <strong id="mixer-count">5</strong>
-        </div>
-        <div class="chip">
-          <span class="label">Board</span>
-          <strong id="level">1</strong>
-        </div>
-        <div class="chip">
-          <span class="label">Career</span>
-          <strong id="career">0</strong>
-        </div>
-        <button type="button" class="chip chip-btn" id="undo-btn">Undo · 1</button>
-      </div>
-
-      <div class="stage">
-        <div class="board-frame">
-          <div id="board" class="board" role="grid" aria-label="JT's Blocks board">
-            <div id="move-chip" class="move-chip" hidden></div>
+      <nav class="arcade" aria-label="Games">
+        <a class="game-card" href="blocks.html">
+          <div class="mini" style="--cols: 4; --rows: 2">
+            <span class="block c1" style="--r: 0; --c: 0"><span class="face"></span></span>
+            <span class="block c1" style="--r: 0; --c: 1"><span class="face"></span></span>
+            <span class="block c2" style="--r: 0; --c: 2"><span class="face"></span></span>
+            <span class="block mixer" style="--r: 0; --c: 3"><span class="face"></span></span>
+            <span class="block c5" style="--r: 1; --c: 0"><span class="face"></span></span>
+            <span class="block c3" style="--r: 1; --c: 1"><span class="face"></span></span>
+            <span class="block c3" style="--r: 1; --c: 2"><span class="face"></span></span>
+            <span class="block c4" style="--r: 1; --c: 3"><span class="face"></span></span>
           </div>
-        </div>
-        <p class="hint" id="hint">Tap a group, tap again to clear.</p>
-      </div>
+          <h2>Blocks</h2>
+          <p>Clear groups. Beat the quota.</p>
+        </a>
+
+        <a class="game-card" href="flood.html">
+          <div class="mini" style="--cols: 4; --rows: 2">
+            <span class="block c2" style="--r: 0; --c: 0"><span class="face"></span></span>
+            <span class="block c2" style="--r: 0; --c: 1"><span class="face"></span></span>
+            <span class="block c1" style="--r: 0; --c: 2"><span class="face"></span></span>
+            <span class="block c3" style="--r: 0; --c: 3"><span class="face"></span></span>
+            <span class="block c2" style="--r: 1; --c: 0"><span class="face"></span></span>
+            <span class="block c5" style="--r: 1; --c: 1"><span class="face"></span></span>
+            <span class="block c4" style="--r: 1; --c: 2"><span class="face"></span></span>
+            <span class="block c1" style="--r: 1; --c: 3"><span class="face"></span></span>
+          </div>
+          <h2>Flood</h2>
+          <p>One color. Few moves.</p>
+        </a>
+
+        <a class="game-card" href="lights.html">
+          <div class="mini" style="--cols: 4; --rows: 2">
+            <span class="block on" style="--r: 0; --c: 0"><span class="face"></span></span>
+            <span class="block off" style="--r: 0; --c: 1"><span class="face"></span></span>
+            <span class="block on" style="--r: 0; --c: 2"><span class="face"></span></span>
+            <span class="block on" style="--r: 0; --c: 3"><span class="face"></span></span>
+            <span class="block off" style="--r: 1; --c: 0"><span class="face"></span></span>
+            <span class="block on" style="--r: 1; --c: 1"><span class="face"></span></span>
+            <span class="block off" style="--r: 1; --c: 2"><span class="face"></span></span>
+            <span class="block off" style="--r: 1; --c: 3"><span class="face"></span></span>
+          </div>
+          <h2>Lights</h2>
+          <p>Tap a tile. Neighbors flip too.</p>
+        </a>
+
+        <a class="game-card" href="pairs.html">
+          <div class="mini" style="--cols: 4; --rows: 2">
+            <span class="block down" style="--r: 0; --c: 0"><span class="face"></span></span>
+            <span class="block c3" style="--r: 0; --c: 1"><span class="face"></span></span>
+            <span class="block down" style="--r: 0; --c: 2"><span class="face"></span></span>
+            <span class="block c5" style="--r: 0; --c: 3"><span class="face"></span></span>
+            <span class="block c1" style="--r: 1; --c: 0"><span class="face"></span></span>
+            <span class="block down" style="--r: 1; --c: 1"><span class="face"></span></span>
+            <span class="block c3" style="--r: 1; --c: 2"><span class="face"></span></span>
+            <span class="block down" style="--r: 1; --c: 3"><span class="face"></span></span>
+          </div>
+          <h2>Pairs</h2>
+          <p>Flip two. Match the marks.</p>
+        </a>
+      </nav>
     </div>
-
-    <div class="toast" id="toast" hidden></div>
-
-    <div class="modal" id="how-modal" hidden>
-      <div class="sheet">
-        <p class="kicker" id="how-kicker">1 / 3</p>
-        <div id="how-step"></div>
-        <div class="modal-actions">
-          <button type="button" class="ghost" id="how-back" hidden>Back</button>
-          <button type="button" class="primary" id="how-next">Next</button>
-        </div>
-      </div>
-    </div>
-
-    <div class="modal" id="end-modal" hidden>
-      <div class="sheet">
-        <p class="kicker" id="end-kicker">Board complete</p>
-        <h2 id="end-title">Nice.</h2>
-        <div class="stars" id="end-stars" aria-label="stars"></div>
-        <dl class="results">
-          <div><dt>Quota</dt><dd id="end-quota">0</dd></div>
-          <div><dt>This board</dt><dd id="end-round">0</dd></div>
-          <div><dt>Left on the board</dt><dd id="end-remaining">0</dd></div>
-          <div><dt>Career</dt><dd id="end-total">0</dd></div>
-        </dl>
-        <div class="modal-actions">
-          <button type="button" class="primary" id="continue-btn">Next board</button>
-          <button type="button" class="primary" id="again-btn">Play again</button>
-        </div>
-      </div>
-    </div>
-
-    <script src="js/game.js?v=4"></script>
   </body>
 </html>
