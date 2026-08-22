@@ -2,10 +2,12 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
     <title>JT's Blocks</title>
     <meta name="description" content="A local recreation of the Yahoo! Games puzzle JT's Blocks." />
+    <meta name="theme-color" content="#f3eee6" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="apple-mobile-web-app-title" content="JT's Blocks" />
     <meta name="mobile-web-app-capable" content="yes" />
     <link rel="stylesheet" href="css/style.css" />
@@ -61,8 +63,10 @@
       </div>
 
       <div class="stage">
-        <div id="board" class="board" role="grid" aria-label="JT's Blocks board">
-          <div id="move-chip" class="move-chip" hidden></div>
+        <div class="board-frame">
+          <div id="board" class="board" role="grid" aria-label="JT's Blocks board">
+            <div id="move-chip" class="move-chip" hidden></div>
+          </div>
         </div>
         <p class="hint" id="hint">Tap a group, tap again to clear.</p>
       </div>

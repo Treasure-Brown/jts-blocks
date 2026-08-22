@@ -48,6 +48,7 @@ html,
 body {
   margin: 0;
   min-height: 100%;
+  min-height: 100dvh;
   background:
     radial-gradient(900px 520px at 8% -8%, rgba(200, 240, 74, 0.55), transparent 52%),
     radial-gradient(720px 460px at 100% 0%, rgba(255, 77, 46, 0.28), transparent 48%),
@@ -56,11 +57,14 @@ body {
     var(--cream);
   color: var(--ink);
   font: 16px/1.45 "DM Sans", "Segoe UI", system-ui, sans-serif;
+  touch-action: manipulation;
+  overscroll-behavior: none;
 }
 
 button {
   font: inherit;
   cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .sparkle {
@@ -100,7 +104,14 @@ button {
   z-index: 1;
   max-width: 920px;
   margin: 0 auto;
-  padding: 18px 16px 32px;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  padding:
+    max(12px, env(safe-area-inset-top))
+    max(12px, env(safe-area-inset-right))
+    max(16px, env(safe-area-inset-bottom))
+    max(12px, env(safe-area-inset-left));
 }
 
 .top {
@@ -165,9 +176,16 @@ button {
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.55);
 }
 
-.ghost:hover {
-  background: rgba(200, 240, 74, 0.55);
-  color: var(--ink);
+@media (hover: hover) {
+  .ghost:hover {
+    background: rgba(200, 240, 74, 0.55);
+    color: var(--ink);
+  }
+
+  .primary:hover {
+    background: rgba(255, 77, 46, 0.8);
+    color: var(--cream);
+  }
 }
 
 .primary {
@@ -179,7 +197,7 @@ button {
   border-color: rgba(255, 255, 255, 0.2);
 }
 
-.primary:hover {
+.primary:active {
   background: rgba(255, 77, 46, 0.8);
   color: var(--cream);
 }
@@ -236,9 +254,16 @@ button {
 
 .chips {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: 8px;
   margin-bottom: 12px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.chips::-webkit-scrollbar {
+  display: none;
 }
 
 .chip,
@@ -246,6 +271,7 @@ button {
   display: grid;
   gap: 2px;
   min-width: 72px;
+  flex: 0 0 auto;
   padding: 8px 12px;
   border: 1px solid rgba(255, 255, 255, 0.5);
   background: rgba(255, 255, 255, 0.32);
@@ -291,6 +317,10 @@ button {
 }
 
 .stage {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
   background: rgba(255, 255, 255, 0.28);
   backdrop-filter: var(--glass);
   -webkit-backdrop-filter: var(--glass);
@@ -301,14 +331,26 @@ button {
     0 16px 40px rgba(17, 17, 17, 0.08);
 }
 
+.board-frame {
+  flex: 1;
+  min-height: 160px;
+  display: grid;
+  place-items: center;
+  container-type: size;
+}
+
 .board {
   --cols: 14;
   --rows: 9;
   position: relative;
-  width: 100%;
+  width: min(100%, calc(100cqh * 14 / 9));
   aspect-ratio: 14 / 9;
+  max-height: 100%;
   background: rgba(17, 17, 17, 0.16);
   overflow: hidden;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
 }
 
 .move-chip {
@@ -446,7 +488,11 @@ button {
   -webkit-backdrop-filter: blur(10px);
   display: grid;
   place-items: center;
-  padding: 20px;
+  padding:
+    max(20px, env(safe-area-inset-top))
+    max(16px, env(safe-area-inset-right))
+    max(20px, env(safe-area-inset-bottom))
+    max(16px, env(safe-area-inset-left));
   z-index: 20;
 }
 
@@ -520,7 +566,7 @@ button {
 .toast {
   position: fixed;
   left: 50%;
-  bottom: 28px;
+  bottom: max(28px, calc(env(safe-area-inset-bottom) + 16px));
   transform: translateX(-50%);
   z-index: 30;
   background: var(--ink);
@@ -539,13 +585,87 @@ button {
 }
 
 @media (max-width: 760px) {
+  html,
+  body {
+    height: 100dvh;
+    overflow: hidden;
+  }
+
+  .sparkle {
+    display: none;
+  }
+
   .top {
-    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+
+  .logo-strong {
+    font-size: 1.35rem;
+  }
+
+  .logo-script {
+    font-size: 1.15rem;
+  }
+
+  .actions {
+    gap: 6px;
   }
 
   .ghost,
   .primary {
-    padding: 8px 12px;
+    min-height: 44px;
+    min-width: 0;
+    padding: 10px 12px;
+  }
+
+  .meter {
+    margin-bottom: 8px;
+  }
+
+  .meter-note {
+    display: none;
+  }
+
+  .chips {
+    margin-bottom: 8px;
+  }
+
+  .chip,
+  .chip-btn {
+    min-height: 44px;
+  }
+
+  .hint {
+    margin: 8px 0 2px;
+    font-size: 0.72rem;
+  }
+
+  .sheet {
+    padding: 22px 18px 18px;
+    max-height: calc(100dvh - 40px);
+    overflow: auto;
+  }
+
+  .modal-actions {
+    flex-direction: column;
+  }
+
+  .modal-actions .ghost,
+  .modal-actions .primary {
+    width: 100%;
+  }
+
+  .move-chip {
+    font-size: 0.72rem;
+    padding: 3px 6px;
+  }
+}
+
+@supports not (width: 1cqh) {
+  .board {
+    width: 100%;
+    max-height: min(100%, 58dvh);
   }
 }
 
